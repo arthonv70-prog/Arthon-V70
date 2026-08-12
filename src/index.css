@@ -122,7 +122,8 @@ body {
   padding: 0 !important;
 }
 
-.is-exporting .school-address-input-parent {
+.is-exporting .school-address-input-parent,
+.is-exporting .principal-input-parent {
   background: transparent !important;
   background-color: transparent !important;
   border: none !important;
@@ -137,6 +138,13 @@ body {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
+}
+
+.is-exporting img {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  max-width: 100% !important;
 }
 
 /* Print Styles */

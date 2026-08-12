@@ -93,7 +93,8 @@ function getLessonAssignedImages(
 }
 
 function checkGradeMatch(rowGradeVal: string, targetGrade: string): boolean {
-  if (!rowGradeVal || !targetGrade || targetGrade === 'all') return true;
+  if (!targetGrade || targetGrade === 'all') return true;
+  if (!rowGradeVal || !rowGradeVal.trim()) return false;
 
   const normalizedRow = rowGradeVal.trim().toLowerCase();
   const normalizedTarget = targetGrade.trim().toLowerCase();
@@ -547,6 +548,12 @@ export default function AcademicProgressSection({
             });
           });
         } else {
+          // If grade is ม.3 and data is missing in this entry, skip pulling/generating data
+          const isM3Grade = targetGradeForTopics.includes('ม.3') || targetGradeForTopics.includes('ม. 3') || targetGradeForTopics.includes('มัธยมศึกษาปีที่ 3') || targetGradeForTopics.includes('มัธยม 3');
+          if (isM3Grade) {
+            return; // Skip grade ม.3 when no data entries exist
+          }
+
           const gradeSeed = targetGradeForTopics.charCodeAt(targetGradeForTopics.length - 1);
           const seedOffset = (sch.name.charCodeAt(sch.name.length - 1) + subjKey.charCodeAt(0) + gradeSeed) % 3;
           const taughtCount = Math.max(2, Math.min(canonical.totalChapters, 3 + seedOffset));

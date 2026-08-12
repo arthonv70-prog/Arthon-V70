@@ -2016,6 +2016,21 @@ export default function App() {
     setPageRangeInput('');
   };
 
+  // Helper to ensure all images in an element are fully loaded before capturing
+  const waitForImagesInElement = async (el: HTMLElement) => {
+    const images = Array.from(el.querySelectorAll('img'));
+    await Promise.all(
+      images.map((img) => {
+        if (img.complete && img.naturalWidth > 0) return Promise.resolve();
+        return new Promise((resolve) => {
+          img.onload = resolve;
+          img.onerror = resolve;
+          setTimeout(resolve, 1200);
+        });
+      })
+    );
+  };
+
   // Batch PDF Builder Engine (With progress tracking to avoid iPad OOM crash)
   const batchBuildPDF = async () => {
     const activePageNums = Object.keys(selectedPages)
@@ -2061,6 +2076,7 @@ export default function App() {
         const prevTransform = paperEl.style.transform;
         paperEl.style.transform = 'none';
         paperEl.classList.add('is-exporting');
+        await waitForImagesInElement(paperEl as HTMLElement);
 
         // Brief delay to let iOS cycle garbage collection and DOM update
         await new Promise(r => setTimeout(r, delayMs));
@@ -2142,6 +2158,7 @@ export default function App() {
         const prevTransform = paperEl.style.transform;
         paperEl.style.transform = 'none';
         paperEl.classList.add('is-exporting');
+        await waitForImagesInElement(paperEl as HTMLElement);
 
         await new Promise(r => setTimeout(r, delayMs));
 
@@ -3528,7 +3545,7 @@ export default function App() {
                 <div className="flex items-center justify-between pl-1">
                   <div className="flex items-center gap-2.5">
                     <div className="w-2.5 h-7 bg-cyan-600 rounded-full" />
-                    <h3 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
+                    <h3 className="text-base font-black text-slate-900 tracking-tight">
                       วิชาที่สอนบ่อย แยกตามลำดับคาบเรียน
                     </h3>
                   </div>
@@ -3581,7 +3598,7 @@ export default function App() {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pl-1">
                 <div className="flex items-center gap-2.5">
                   <div className="w-2.5 h-7 bg-orange-600 rounded-full" />
-                  <h3 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
+                  <h3 className="text-lg font-black text-slate-900 tracking-tight">
                     รายการปัญหาและอุปสรรคที่พบ
                   </h3>
                 </div>
@@ -4309,11 +4326,12 @@ export default function App() {
 
         {/* Document A4 Paper items Bulk render container */}
         {filteredRows.length > 0 && activeTab === 'reports' && (() => {
-          const isMobileScreen = (typeof window !== 'undefined' && window.innerWidth < 640) || containerWidth < 500;
-          const isTabletPortrait = (typeof window !== 'undefined' && window.innerWidth >= 640 && window.innerWidth <= 1024) || (containerWidth >= 500 && containerWidth <= 1024);
+          const winWidth = typeof window !== 'undefined' ? window.innerWidth : 1200;
+          const isMobileScreen = winWidth < 640;
+          const isTablet = winWidth >= 640 && winWidth < 1024;
           const autoScale = isMobileScreen
             ? 0.40
-            : isTabletPortrait
+            : isTablet
               ? 0.70
               : 1.0;
           const effectiveScale = zoomScale === -1 ? autoScale : zoomScale;
@@ -4537,6 +4555,7 @@ export default function App() {
                               const prevTransform = el.style.transform;
                               el.style.transform = 'none';
                               el.classList.add('is-exporting');
+                              await waitForImagesInElement(el as HTMLElement);
                               try {
                                 const canvas = await html2canvas(el as HTMLElement, {
                                   scale: htmlScale,
@@ -4592,6 +4611,7 @@ export default function App() {
                               const prevTransform = el.style.transform;
                               el.style.transform = 'none';
                               el.classList.add('is-exporting');
+                              await waitForImagesInElement(el as HTMLElement);
                               try {
                                 const canvas = await html2canvas(el as HTMLElement, {
                                   scale: htmlScale,
@@ -4705,6 +4725,7 @@ export default function App() {
                                 const prevTransform = el.style.transform;
                                 el.style.transform = 'none';
                                 el.classList.add('is-exporting');
+                                await waitForImagesInElement(el as HTMLElement);
                                 try {
                                   const canvas = await html2canvas(el as HTMLElement, {
                                     scale: 2,
@@ -4742,6 +4763,7 @@ export default function App() {
                                 const prevTransform = el.style.transform;
                                 el.style.transform = 'none';
                                 el.classList.add('is-exporting');
+                                await waitForImagesInElement(el as HTMLElement);
                                 try {
                                   const canvas = await html2canvas(el as HTMLElement, {
                                     scale: 2,

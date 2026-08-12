@@ -689,8 +689,16 @@ export default function ReportPaper({
     >
       {/* Background Watermark Logo */}
       {logo && (
-        <div className="absolute inset-0 flex items-center justify-center opacity-[0.04] pointer-events-none z-0 overflow-hidden">
-          <img src={logo} alt="Watermark" className="w-[55%] max-w-sm object-contain grayscale" />
+        <div
+          data-html2canvas-ignore="true"
+          className="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none z-0 overflow-hidden no-print"
+        >
+          <img
+            src={logo}
+            alt="Watermark"
+            className="w-[50%] max-w-[220px] object-contain grayscale"
+            style={{ opacity: 0.03, width: '220px', height: '220px', objectFit: 'contain' }}
+          />
         </div>
       )}
 
@@ -700,7 +708,14 @@ export default function ReportPaper({
       <div className="flex-grow flex flex-col justify-start space-y-1.5 overflow-hidden relative z-10">
         {/* Header Block */}
         <div className="text-center mb-0.5 pb-1 border-b border-black -mt-1.5 shrink-0" style={{ letterSpacing: 'normal', marginTop: '-6px' }}>
-          {logo && <img src={logo} alt="Logo" className="h-10 mx-auto mb-1 object-contain" />}
+          {logo && (
+            <img
+              src={logo}
+              alt="Logo"
+              className="h-10 mx-auto mb-1 object-contain"
+              style={{ height: '40px', width: 'auto', maxHeight: '40px', objectFit: 'contain' }}
+            />
+          )}
           <h2 className="text-[17.5px] font-bold text-black leading-tight">รายงานผลการปฏิบัติงานการจัดการเรียนรู้</h2>
           {schoolAndClass && <p className="text-[13.5px] font-bold text-black mt-0.5 leading-tight">{schoolAndClass}</p>}
           <p className="text-[12px] mt-0.5 text-black font-normal">
@@ -719,15 +734,15 @@ export default function ReportPaper({
               {/* Row 1: Subdiv & Principal */}
               <div className="flex flex-wrap items-center gap-x-6 gap-y-0.5">
                 {subdivVal && (
-                  <div className="inline-block">
+                  <div className="inline-block shrink-0">
                     <span className="font-bold text-black">สังกัด/หน่วยงาน:</span>{' '}
                     <span className="text-black ml-0.5">{convertToThaiNumerals(subdivVal)}</span>
                   </div>
                 )}
                 {(principalName || principalRank || true) && (
-                  <div className="inline-flex items-center group/principal relative">
+                  <div className="inline-flex items-center group/principal relative shrink-0">
                     <span className="font-bold text-black mr-1">ครูใหญ่:</span>
-                    <div className="principal-input-parent inline-flex items-center bg-slate-50 border border-slate-200 rounded px-1.5 py-0.5">
+                    <div className="principal-input-parent inline-flex items-center gap-1">
                       <input
                         type="text"
                         value={principalRank}
@@ -735,12 +750,11 @@ export default function ReportPaper({
                           setPrincipalRank(e.target.value);
                           handlePrincipalChange(e.target.value, principalName);
                         }}
-                        className="principal-rank-input bg-transparent border-none outline-none text-black text-[12px] px-0.5 py-0 rounded-sm transition-all print-input placeholder-slate-300 text-right"
-                        style={{ width: '49px', textAlign: 'right' }}
+                        className="principal-rank-input bg-transparent border-none outline-none text-black text-[12px] px-0 py-0 transition-all print-input placeholder-slate-300 text-left"
+                        style={{ width: `${Math.max(28, getThaiDisplayWidth(principalRank || '', 28))}px` }}
                         placeholder="ยศ"
                         title="พิมพ์เพื่อแก้ไขยศ/ตำแหน่งครูใหญ่"
                       />
-                      <span className="mx-0.5 text-slate-300"> </span>
                       <input
                         type="text"
                         value={principalName}
@@ -748,8 +762,8 @@ export default function ReportPaper({
                           setPrincipalName(e.target.value);
                           handlePrincipalChange(principalRank, e.target.value);
                         }}
-                        className="principal-name-input bg-transparent border-none outline-none text-black text-[12px] px-0.5 py-0 rounded-sm transition-all print-input placeholder-slate-300"
-                        style={{ width: `${Math.max(60, getThaiDisplayWidth(principalName || 'ชื่อครูใหญ่', 120))}px` }}
+                        className="principal-name-input bg-transparent border-none outline-none text-black text-[12px] px-0 py-0 transition-all print-input placeholder-slate-300 text-left"
+                        style={{ width: `${Math.max(60, getThaiDisplayWidth(principalName || '', 60))}px` }}
                         placeholder="ชื่อ-สกุล ครูใหญ่"
                         title="พิมพ์เพื่อแก้ไขชื่อครูใหญ่"
                       />
@@ -791,10 +805,10 @@ export default function ReportPaper({
 
               {/* Row 2: Address */}
               {schoolId && (
-                <div className="flex items-center gap-x-2 mt-0.5">
+                <div className="flex items-center gap-x-2 mt-0.5 w-full">
                   <div className="inline-flex items-center group/address relative w-full">
                     <span className="font-bold text-black mr-1 shrink-0">ที่ตั้ง:</span>
-                    <div className="school-address-input-parent inline-flex items-center bg-slate-50 border border-slate-200 rounded px-1.5 py-0.5 flex-1 min-w-0">
+                    <div className="school-address-input-parent inline-flex items-center bg-transparent flex-1 min-w-0">
                       <input
                         type="text"
                         value={address}
@@ -802,7 +816,7 @@ export default function ReportPaper({
                           setAddress(e.target.value);
                           onSaveAddress(schoolId, e.target.value);
                         }}
-                        className="school-address-input bg-transparent border-none outline-none text-black text-[12px] px-0.5 py-0 rounded-sm transition-all print-input placeholder-slate-300 w-full"
+                        className="school-address-input bg-transparent border-none outline-none text-black text-[12px] px-0 py-0 transition-all print-input placeholder-slate-300 w-full"
                         placeholder="ที่ตั้งโรงเรียน"
                         title="พิมพ์เพื่อแก้ไขที่ตั้งโรงเรียน"
                       />

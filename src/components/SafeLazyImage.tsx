@@ -48,6 +48,12 @@ export default function SafeLazyImage({
     const el = elementRef.current;
     if (!el) return;
 
+    // Check if element is being exported or printed
+    if (el.closest('.is-exporting') || el.closest('.is-checked-print')) {
+      setIsInView(true);
+      return;
+    }
+
     // Check if IntersectionObserver is supported
     if (typeof window === 'undefined' || !('IntersectionObserver' in window)) {
       setIsInView(true);
@@ -111,18 +117,17 @@ export default function SafeLazyImage({
         />
       )}
 
-      {/* Main Image rendered only when in view */}
-      {isInView && !hasFailed && currentSrc && (
+      {/* Main Image rendered when src exists */}
+      {!hasFailed && currentSrc && (
         <img
           src={currentSrc}
           alt={alt}
           crossOrigin={crossOrigin}
           referrerPolicy={referrerPolicy}
-          className={`absolute inset-0 w-full h-full transition-all duration-300 ${
+          className={`absolute inset-0 w-full h-full z-10 ${
             imageFitMode === 'cover' ? 'object-cover' : 'object-contain'
-          } object-center z-10 ${
-            isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-98'
-          }`}
+          } object-center`}
+          style={{ width: '100%', height: '100%', objectFit: imageFitMode, opacity: 1 }}
           onLoad={handleLoad}
           onError={handleError}
         />

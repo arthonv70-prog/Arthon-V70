@@ -196,7 +196,7 @@ export default function ComparativeLeaderboard({
       </div>
 
       {/* EXECUTIVE HIGHLIGHT CARDS (3 Executive Brief Cards organized in clean responsive tablet & desktop grid) */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
         {/* Card 1: Top Performer */}
         {topPerformer && (
           <div className="bg-gradient-to-br from-amber-500/10 via-amber-50/60 to-white rounded-2xl p-4 sm:p-5 border border-amber-200/90 shadow-2xs flex flex-col justify-between space-y-3 relative overflow-hidden min-w-0">
@@ -212,23 +212,23 @@ export default function ComparativeLeaderboard({
 
             <div className="space-y-2.5">
               <div className="flex items-center justify-between gap-2 min-w-0">
-                <span className="text-base sm:text-lg font-black text-slate-900 truncate">{topPerformer.fullName}</span>
+                <span className="text-base sm:text-lg font-black text-slate-900 whitespace-nowrap">{topPerformer.fullName}</span>
                 <span className="text-xs font-bold text-slate-500 shrink-0">({topPerformer.province})</span>
               </div>
 
               {/* Stats Box */}
-              <div className="grid grid-cols-3 gap-2 bg-white/90 p-2.5 rounded-xl border border-amber-200/80 text-center shadow-2xs divide-x divide-amber-100 min-w-0">
+              <div className="grid grid-cols-3 gap-1.5 sm:gap-2 bg-white/90 p-2 sm:p-2.5 rounded-xl border border-amber-200/80 text-center shadow-2xs divide-x divide-amber-100 min-w-0">
                 <div className="px-1 min-w-0">
-                  <span className="text-[10px] sm:text-[11px] text-slate-500 font-bold block truncate">ครอบคลุม</span>
-                  <span className="text-sm sm:text-base md:text-lg font-black text-emerald-700 block truncate">{topPerformer.coveragePct}%</span>
+                  <span className="text-[10px] sm:text-[11px] text-slate-500 font-bold block whitespace-nowrap leading-tight">ครอบคลุม</span>
+                  <span className="text-sm sm:text-base md:text-lg font-black text-emerald-700 block whitespace-nowrap">{topPerformer.coveragePct}%</span>
                 </div>
                 <div className="px-1 min-w-0">
-                  <span className="text-[10px] sm:text-[11px] text-slate-500 font-bold block truncate">เข้าเรียนเฉลี่ย</span>
-                  <span className="text-sm sm:text-base md:text-lg font-black text-blue-700 block truncate">{topPerformer.attendanceRate}%</span>
+                  <span className="text-[10px] sm:text-[11px] text-slate-500 font-bold block whitespace-nowrap leading-tight">เข้าเรียนเฉลี่ย</span>
+                  <span className="text-sm sm:text-base md:text-lg font-black text-blue-700 block whitespace-nowrap">{topPerformer.attendanceRate}%</span>
                 </div>
                 <div className="px-1 min-w-0">
-                  <span className="text-[10px] sm:text-[11px] text-slate-500 font-bold block truncate">รายงานสะสม</span>
-                  <span className="text-sm sm:text-base md:text-lg font-black text-indigo-700 block truncate">{topPerformer.totalReports}</span>
+                  <span className="text-[10px] sm:text-[11px] text-slate-500 font-bold block whitespace-nowrap leading-tight">รายงานสะสม</span>
+                  <span className="text-sm sm:text-base md:text-lg font-black text-indigo-700 block whitespace-nowrap">{topPerformer.totalReports}</span>
                 </div>
               </div>
             </div>
@@ -252,7 +252,7 @@ export default function ComparativeLeaderboard({
           </div>
 
           <div className="space-y-2.5">
-            <div className="text-base sm:text-lg font-black text-slate-900 truncate">
+            <div className="text-base sm:text-lg font-black text-slate-900 leading-snug">
               {isSecondary
                 ? `${submittedSchoolsOverall} จาก 2 รร.เป้าหมาย (ม.1-ม.3)`
                 : isMultiClassroom
@@ -261,18 +261,18 @@ export default function ComparativeLeaderboard({
             </div>
 
             {/* Stats Box */}
-            <div className="grid grid-cols-3 gap-2 bg-white/90 p-2.5 rounded-xl border border-blue-200/80 text-center shadow-2xs divide-x divide-blue-100 min-w-0">
+            <div className="grid grid-cols-3 gap-1.5 sm:gap-2 bg-white/90 p-2 sm:p-2.5 rounded-xl border border-blue-200/80 text-center shadow-2xs divide-x divide-blue-100 min-w-0">
               <div className="px-1 min-w-0">
-                <span className="text-[10px] sm:text-[11px] text-slate-500 font-bold block truncate">ครอบคลุมรวม</span>
-                <span className="text-sm sm:text-base md:text-lg font-black text-blue-700 block truncate">{overallCoveragePct}%</span>
+                <span className="text-[10px] sm:text-[11px] text-slate-500 font-bold block whitespace-nowrap leading-tight">ครอบคลุมรวม</span>
+                <span className="text-sm sm:text-base md:text-lg font-black text-blue-700 block whitespace-nowrap">{overallCoveragePct}%</span>
               </div>
               <div className="px-1 min-w-0">
-                <span className="text-[10px] sm:text-[11px] text-slate-500 font-bold block truncate">เข้าเรียนรวม</span>
-                <span className="text-sm sm:text-base md:text-lg font-black text-purple-700 block truncate">{overallAttendanceRate}%</span>
+                <span className="text-[10px] sm:text-[11px] text-slate-500 font-bold block whitespace-nowrap leading-tight">เข้าเรียนรวม</span>
+                <span className="text-sm sm:text-base md:text-lg font-black text-purple-700 block whitespace-nowrap">{overallAttendanceRate}%</span>
               </div>
               <div className="px-1 min-w-0">
-                <span className="text-[10px] sm:text-[11px] text-slate-500 font-bold block truncate">รายงานรวม</span>
-                <span className="text-sm sm:text-base md:text-lg font-black text-emerald-700 block truncate">{totalReportsOverall}</span>
+                <span className="text-[10px] sm:text-[11px] text-slate-500 font-bold block whitespace-nowrap leading-tight">รายงานรวม</span>
+                <span className="text-sm sm:text-base md:text-lg font-black text-emerald-700 block whitespace-nowrap">{totalReportsOverall}</span>
               </div>
             </div>
           </div>
@@ -293,7 +293,7 @@ export default function ComparativeLeaderboard({
 
         {/* Card 3: Action Needed / Follow Up Unit */}
         {requiresSupport && (
-          <div className="bg-gradient-to-br from-rose-500/10 via-rose-50/50 to-white rounded-2xl p-4 sm:p-5 border border-rose-200/90 shadow-2xs flex flex-col justify-between space-y-3 min-w-0">
+          <div className="bg-gradient-to-br from-rose-500/10 via-rose-50/50 to-white rounded-2xl p-4 sm:p-5 border border-rose-200/90 shadow-2xs flex flex-col justify-between space-y-3 min-w-0 md:col-span-2 lg:col-span-1">
             <div className="flex flex-wrap items-center justify-between gap-2 border-b border-rose-200/60 pb-2.5">
               <span className="text-[11px] font-black uppercase tracking-wider text-rose-800 bg-rose-100/90 px-2.5 py-1 rounded-full border border-rose-200 inline-flex items-center gap-1 shrink-0">
                 <AlertTriangle className="w-3.5 h-3.5 text-rose-600" />
@@ -310,19 +310,19 @@ export default function ComparativeLeaderboard({
 
             <div className="space-y-2.5">
               <div className="flex items-center justify-between gap-2 min-w-0">
-                <span className="text-base sm:text-lg font-black text-slate-900 truncate">{requiresSupport.fullName}</span>
+                <span className="text-base sm:text-lg font-black text-slate-900 whitespace-nowrap">{requiresSupport.fullName}</span>
                 <span className="text-xs font-bold text-slate-500 shrink-0">({requiresSupport.province})</span>
               </div>
 
               {/* Stats Box */}
-              <div className="grid grid-cols-2 gap-2 bg-white/90 p-2.5 rounded-xl border border-rose-200/80 text-center shadow-2xs divide-x divide-rose-100 min-w-0">
+              <div className="grid grid-cols-2 gap-2 bg-white/90 p-2 sm:p-2.5 rounded-xl border border-rose-200/80 text-center shadow-2xs divide-x divide-rose-100 min-w-0">
                 <div className="px-1 min-w-0">
-                  <span className="text-[10px] sm:text-[11px] text-slate-500 font-bold block truncate">ครอบคลุม</span>
-                  <span className="text-sm sm:text-base md:text-lg font-black text-rose-700 block truncate">{requiresSupport.coveragePct}%</span>
+                  <span className="text-[10px] sm:text-[11px] text-slate-500 font-bold block whitespace-nowrap leading-tight">ครอบคลุม</span>
+                  <span className="text-sm sm:text-base md:text-lg font-black text-rose-700 block whitespace-nowrap">{requiresSupport.coveragePct}%</span>
                 </div>
                 <div className="px-1 min-w-0">
-                  <span className="text-[10px] sm:text-[11px] text-slate-500 font-bold block truncate">ส่งแล้ว</span>
-                  <span className="text-sm sm:text-base md:text-lg font-black text-slate-800 block truncate">{requiresSupport.submittedCount}/{requiresSupport.totalSchools} รร.</span>
+                  <span className="text-[10px] sm:text-[11px] text-slate-500 font-bold block whitespace-nowrap leading-tight">ส่งแล้ว</span>
+                  <span className="text-sm sm:text-base md:text-lg font-black text-slate-800 block whitespace-nowrap">{requiresSupport.submittedCount}/{requiresSupport.totalSchools} รร.</span>
                 </div>
               </div>
             </div>
@@ -330,13 +330,13 @@ export default function ComparativeLeaderboard({
             {isSecondary ? (
               <div className="text-[11px] text-amber-900/90 font-medium bg-white/80 p-2.5 rounded-xl border border-amber-100 flex items-center gap-1.5 min-w-0">
                 <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                <span className="truncate">มัธยมศึกษาตอนต้น 2 รร.ขยายโอกาส ({submittedSchoolsOverall}/2 รร.)</span>
+                <span className="whitespace-normal">มัธยมศึกษาตอนต้น 2 รร.ขยายโอกาส ({submittedSchoolsOverall}/2 รร.)</span>
               </div>
             ) : requiresSupport.pendingSchools.length > 0 ? (
               <div className="text-[11px] text-rose-900/90 font-medium bg-white/80 p-2.5 rounded-xl border border-rose-100 flex items-start gap-1.5 min-w-0">
                 <span className="shrink-0">📌</span>
-                <span className="line-clamp-2 leading-snug">
-                  โรงเรียนที่ยังไม่ส่ง: <strong className="text-rose-700 font-bold">{requiresSupport.pendingSchools.slice(0, 3).join(', ')}{requiresSupport.pendingSchools.length > 3 ? ` และอีก ${requiresSupport.pendingSchools.length - 3} แห่ง` : ''}</strong>
+                <span className="leading-snug">
+                  โรงเรียนที่ยังไม่ส่ง: <strong className="text-rose-700 font-bold">{requiresSupport.pendingSchools.slice(0, 5).join(', ')}{requiresSupport.pendingSchools.length > 5 ? ` และอีก ${requiresSupport.pendingSchools.length - 5} แห่ง` : ''}</strong>
                 </span>
               </div>
             ) : (
