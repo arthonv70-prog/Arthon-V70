@@ -1,0 +1,10 @@
+{
+  "name": " BPP Region 2 Report Generator",
+  "description": "ระบบสร้างรายงานผลการปฏิบัติงาน รร.ตชด. สังกัด บก.ตชด.ภาค 2 พร้อมแดชบอร์ดวิเคราะห์และระบบประมวลผลอัจฉริยะ",
+  "requestFramePermissions": [
+    "geolocation"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
